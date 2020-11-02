@@ -11,6 +11,7 @@ bool find_dublicates_S(std::string line, int lenght);
 
 int main()
 {
+	setlocale(LC_ALL, "ru");
 	//char
 	{
 		try {
