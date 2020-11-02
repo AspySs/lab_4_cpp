@@ -1,5 +1,14 @@
 # Prerequisites
 *.d
+#studioFILES
+*.sln
+*.vcxproj
+*.filters
+*.user
+
+#paths
+*Debug
+*.vs
 
 # Compiled Object files
 *.slo
