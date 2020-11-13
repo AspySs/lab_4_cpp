@@ -20,12 +20,12 @@ int main()
 			bool result = false;
 			while (std::cin >> lenght) {
 				if (std::cin.fail()) {
-					throw 666;
+					throw "Ошибка при чтении из файла";
 				}
 				char* c_string = new char[lenght]; // динамический массив символов
 				for (int i = 0; i < lenght; i++) {
 					if (!(std::cin >> c_string[i])) {
-						throw 666;
+						throw "Ошибка при чтении из файла";
 					}
 				}
 				result = find_dublicates_C(c_string, lenght);
@@ -49,7 +49,7 @@ int main()
 		}
 		catch (...) {
 			std::cerr << "\n Ошибка при чтении файла, данные некорректны! \n";
-			return 666;
+			return 6;
 		}
 
 
@@ -86,7 +86,7 @@ int main()
 		}
 		catch (...) {
 			std::cerr << "\n Ошибка при чтении файла, данные некорректны! \n";
-			return 666;
+			return 6;
 		}
 	}
 	//string
