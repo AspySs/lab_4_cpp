@@ -95,8 +95,8 @@ int main()
 }
 bool find_dublicates_C(char* source, int lenght) {
 	bool result = false;
-	for (int i = 0; i < (lenght - 1); i++) {
-		for (int p = i+1; p < (lenght - 1); p++) {
+	for (int i = 0; i < (lenght); i++) {
+		for (int p = i+1; p < (lenght); p++) {
 			if (source[i] == source[p]) {
 				result = true;
 				return result;
@@ -107,8 +107,8 @@ bool find_dublicates_C(char* source, int lenght) {
 }
 bool find_dublicates_S(std::string line, int lenght) {
 	bool result = false;
-	for (int i = 0; i < (lenght - 1); i++) {
-		for (int p = i + 1; p < (lenght - 1); p++) {
+	for (int i = 0; i < (lenght); i++) {
+		for (int p = i + 1; p < (lenght); p++) {
 			if (line[i] == line[p]) {
 				result = true;
 				return result;
