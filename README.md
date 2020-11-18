@@ -25,7 +25,7 @@ char: False
 ```
 * Вход:
 ```
- 6
+6
 qwerty
 7
 qwertyu
@@ -33,6 +33,10 @@ qwertyu
 qwertyui
 9
 qweqweqwe
+10
+qwert yuio
+11
+qwert yuioq
 ```
 - Выход:
 ```
@@ -40,8 +44,12 @@ char: False
 char: False
 char: False
 char: True
+char: False
+char: True
 string: False
 string: False
+string: False
+string: True
 string: False
 string: True
 ```
