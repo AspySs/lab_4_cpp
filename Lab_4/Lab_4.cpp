@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdio>
 #include <cctype>
 #pragma warning(disable : 4996) // чтобы freopen не ругался
 
@@ -15,23 +16,18 @@ int main()
 	//char
 	{
 		try {
-			freopen("data.txt", "r", stdin); // это как ifstream но круче, работает как с консолью
+			std::ifstream c_data("data.txt");
 			int lenght;
 			bool result = false;
-			while (std::cin >> lenght) {
-				if (std::cin.fail()) {
-					throw "Ошибка при чтении из файла";
-				}
+			while (c_data >> lenght) {
 				char* c_string = new char[lenght]; // динамический массив символов
-				for (int i = 0; i < lenght; i++) {
-					if (!(std::cin >> c_string[i])) {
-						throw "Ошибка при чтении из файла";
-					}
+				c_data.clear();
+				c_data.get();
+				c_data.sync();
+				if (!(c_data.getline(c_string, lenght + 1))) {
+					throw "ошибка при чтении файла";
 				}
 				result = find_dublicates_C(c_string, lenght);
-				delete[]c_string;
-
-
 				std::ofstream file_clear("answer_char.txt", std::ios_base::trunc); // чистим файл от старых записей
 				file_clear.close();
 				std::ofstream file("answer_char.txt", std::ios_base::app);
@@ -65,7 +61,13 @@ int main()
 			std::string answ;
 			while (data >> len) {
 				std::string line;
-				data >> line;
+				data.clear();
+				data.get();
+				data.sync();
+				if (!(getline(data, line))) {
+					throw "ошибка при чтении файла";
+				}
+				;
 				answer = find_dublicates_S(line, len);
 				line.clear();
 				if (answer) {
