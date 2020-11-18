@@ -7,96 +7,93 @@
 
 bool find_dublicates_C(char* source, int lenght);
 bool find_dublicates_S(std::string line, int lenght);
+void work_with_char();
+void work_with_string();
 
 //std::string functionString(const std::string& source);
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	//char
-	{
-		try {
-			std::ifstream c_data("data.txt");
-			int lenght;
-			bool result = false;
-			while (c_data >> lenght) {
-				char* c_string = new char[lenght]; // динамический массив символов
-				c_data.clear();
-				c_data.get();
-				c_data.sync();
-				if (!(c_data.getline(c_string, lenght + 1))) {
-					throw "ошибка при чтении файла";
-				}
-				result = find_dublicates_C(c_string, lenght);
-				std::ofstream file_clear("answer_char.txt", std::ios_base::trunc); // чистим файл от старых записей
-				file_clear.close();
-				std::ofstream file("answer_char.txt", std::ios_base::app);
-				if (result) {
-					std::cout << "char: " << "True" << "\n";
-					file << "True" << "\n";
-				}
-				else {
-					std::cout << "char: " << "False" << "\n";
-					file << "False" << "\n";
-				}
-				file.close(); // закрываем файл
+	work_with_char();
+	work_with_string();
+}
+void work_with_char() {
+	try {
+		std::ifstream c_data("data.txt");
+		int lenght;
+		bool result = false;
+		while (c_data >> lenght) {
+			char* c_string = new char[lenght]; // динамический массив символов
+			c_data.clear();
+			c_data.get();
+			c_data.sync();
+			if (!(c_data.getline(c_string, lenght + 1))) {
+				throw "ошибка при чтении файла";
+			}
+			result = find_dublicates_C(c_string, lenght);
+			std::ofstream file_clear("answer_char.txt", std::ios_base::trunc); // чистим файл от старых записей
+			file_clear.close();
+			std::ofstream file("answer_char.txt", std::ios_base::app);
+			if (result) {
+				std::cout << "char: " << "True" << "\n";
+				file << "True" << "\n";
+			}
+			else {
+				std::cout << "char: " << "False" << "\n";
+				file << "False" << "\n";
+			}
+			file.close(); // закрываем файл
 
+		}		
+	}
+	catch (...) {
+		std::cerr << "\n Ошибка при чтении файла, данные некорректны! \n";
+		return;
+	}
+}
+void work_with_string() {
+	try {
+		std::ifstream data("data.txt");
+		int len;
+		bool answer = false;
+		std::string answ;
+		while (data >> len) {
+			std::string line;
+			data.clear();
+			data.get();
+			data.sync();
+			if (!(getline(data, line))) {
+				throw "ошибка при чтении файла";
+			}
+			;
+			answer = find_dublicates_S(line, len);
+			line.clear();
+			if (answer) {
+				std::cout << "string: " << "True" << "\n";
+				answ = answ + "True\n";
+			}
+			else {
+				std::cout << "string: " << "False" << "\n";
+				answ = answ + "False\n";
 			}
 		}
-		catch (...) {
-			std::cerr << "\n Ошибка при чтении файла, данные некорректны! \n";
-			return 6;
-		}
 
-
+		std::ofstream data_clear("answer_string.txt", std::ios_base::trunc); // чистим файл от старых записей
+		data_clear.close();
+		std::ofstream data_file("answer_string.txt", std::ios_base::app);
+		data_file << answ << "\n";
+		data_file.close(); // закрываем файл
 	}
-	//char
-
-	//string
-	{
-		try {
-			std::ifstream data("data.txt");
-			int len;
-			bool answer = false;
-			std::string answ;
-			while (data >> len) {
-				std::string line;
-				data.clear();
-				data.get();
-				data.sync();
-				if (!(getline(data, line))) {
-					throw "ошибка при чтении файла";
-				}
-				;
-				answer = find_dublicates_S(line, len);
-				line.clear();
-				if (answer) {
-					std::cout << "string: " << "True" << "\n";
-					answ = answ + "True\n";
-				}
-				else {
-					std::cout << "string: " << "False" << "\n";
-					answ = answ + "False\n";
-				}
-			}
-
-			std::ofstream data_clear("answer_string.txt", std::ios_base::trunc); // чистим файл от старых записей
-			data_clear.close();
-			std::ofstream data_file("answer_string.txt", std::ios_base::app);
-			data_file << answ << "\n";
-			data_file.close(); // закрываем файл
-		}
-		catch (...) {
-			std::cerr << "\n Ошибка при чтении файла, данные некорректны! \n";
-			return 6;
-		}
+	catch (...) {
+		std::cerr << "\n Ошибка при чтении файла, данные некорректны! \n";
+		return;
 	}
-	//string
 }
 bool find_dublicates_C(char* source, int lenght) {
 	bool result = false;
 	for (int i = 0; i < (lenght); i++) {
-		for (int p = i+1; p < (lenght); p++) {
+		for (int p = i + 1; p < (lenght); p++) {
 			if (source[i] == source[p]) {
 				result = true;
 				return result;
